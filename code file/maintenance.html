@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy System Maintenance</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #2980b9, #6dd5fa, #1e5799, #3498db);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite, fadeIn 1.5s ease-in-out;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 0% 50%; }
+            75% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Container Styling */
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 600px;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 30px;
+            font-weight: 600;
+            color: #3498db;
+            margin-bottom: 20px;
+            animation: textColorChange 3s ease-in-out infinite;
+        }
+
+        @keyframes textColorChange {
+            0% { color: #3498db; }
+            25% { color: #1e5799; }
+            50% { color: #1abc9c; }
+            75% { color: #2980b9; }
+            100% { color: #3498db; }
+        }
+
+        /* Form Styling */
+        label {
+            font-size: 18px;
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 2px solid #f39c12;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #ffcc29;
+            outline: none;
+            box-shadow: 0 0 10px rgba(243, 156, 18, 0.6);
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            font-size: 18px;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out, transform 0.3s ease;
+            width: 200px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🛠 Energy System Maintenance</h1>
+        
+        <form id="maintenanceForm">
+            <label for="energyType">⚡ Type of Energy System:</label>
+            <select id="energyType" name="energyType" required>
+                <option value="">Select an Energy System</option>
+                <option value="solar">Solar Power</option>
+                <option value="wind">Wind Power</option>
+                <option value="hydro">Hydropower</option>
+                <option value="geothermal">Geothermal</option>
+            </select>
+
+            <label for="efficiency">💡 System Efficiency:</label>
+            <input type="number" id="efficiency" name="efficiency" step="any" placeholder="Efficiency (%)" required>
+
+            <label for="maintenanceFreq">🔧 Maintenance Frequency:</label>
+            <select id="maintenanceFreq" name="maintenanceFreq" required>
+                <option value="">Select Frequency</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="semiAnnually">Semi-Annually</option>
+                <option value="annually">Annually</option>
+            </select>
+
+            <button type="button" onclick="showTips()">Submit & Get Tips</button>
+        </form>
+
+        <div id="maintenanceTips" style="display: none;">
+            <h2>🔧 Maintenance Tips:</h2>
+            <ul id="tipsList"></ul>
+        </div>
+
+        <a href="/" style="display:block; margin-top: 20px;"><button>🏠 Back to Home</button></a>
+    </div>
+
+    <script>
+        function showTips() {
+            const energyType = document.getElementById("energyType").value;
+            const efficiency = document.getElementById("efficiency").value;
+            const maintenanceFreq = document.getElementById("maintenanceFreq").value;
+
+            let tips = [];
+
+            if (energyType === "solar") {
+                tips.push("✔ Regularly clean the solar panels to maintain high efficiency.");
+                if (efficiency < 80) {
+                    tips.push("✔ Consider upgrading the inverter if efficiency is below 80%.");
+                }
+                if (maintenanceFreq === "monthly") {
+                    tips.push("✔ Inspect wiring and connections monthly.");
+                }
+            } else if (energyType === "wind") {
+                tips.push("✔ Lubricate the moving parts of the wind turbine to prevent wear and tear.");
+                if (efficiency < 75) {
+                    tips.push("✔ Perform a blade inspection to ensure they are not damaged.");
+                }
+                if (maintenanceFreq === "quarterly") {
+                    tips.push("✔ Check the tower stability quarterly.");
+                }
+            } else if (energyType === "hydro") {
+                tips.push("✔ Clean the water intake regularly to avoid blockages.");
+                if (efficiency < 70) {
+                    tips.push("✔ Inspect the turbine for any issues if efficiency is low.");
+                }
+                if (maintenanceFreq === "semiAnnually") {
+                    tips.push("✔ Inspect the electrical systems every six months.");
+                }
+            } else if (energyType === "geothermal") {
+                tips.push("✔ Check the geothermal system’s pressure and temperature regularly.");
+                if (efficiency < 70) {
+                    tips.push("✔ Check the heat exchanger for any issues if efficiency is low.");
+                }
+                if (maintenanceFreq === "annually") {
+                    tips.push("✔ Schedule a full system inspection annually.");
+                }
+            }
+
+            document.getElementById("tipsList").innerHTML = tips.map(tip => `<li>${tip}</li>`).join('');
+            document.getElementById("maintenanceTips").style.display = 'block';
+        }
+    </script>
+</body>
+</html>
